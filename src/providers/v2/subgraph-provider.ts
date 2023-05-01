@@ -39,8 +39,8 @@ type RawV2SubgraphPool = {
 const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
   [ChainId.BOMB]:
     'https://graph.bombchain.com/subgraphs/name/bombswap/bombswap',
-  [ChainId.RINKEBY]:
-    'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-rinkeby',
+  [ChainId.MAINNET]:
+    'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2',
 };
 
 const threshold = 0.025;
@@ -107,10 +107,9 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
     let pools: RawV2SubgraphPool[] = [];
 
     log.info(
-      `Getting V2 pools from the subgraph with page size ${this.pageSize}${
-        providerConfig?.blockNumber
-          ? ` as of block ${providerConfig?.blockNumber}`
-          : ''
+      `Getting V2 pools from the subgraph with page size ${this.pageSize}${providerConfig?.blockNumber
+        ? ` as of block ${providerConfig?.blockNumber}`
+        : ''
       }.`
     );
 
