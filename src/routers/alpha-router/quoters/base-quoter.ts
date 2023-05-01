@@ -4,7 +4,12 @@ import { Pair } from '@uniswap/v2-sdk';
 import { Pool } from '@uniswap/v3-sdk';
 import _ from 'lodash';
 
-import { ITokenListProvider, ITokenProvider, ITokenValidatorProvider, TokenValidationResult } from '../../../providers';
+import {
+  ITokenListProvider,
+  ITokenProvider,
+  ITokenValidatorProvider,
+  TokenValidationResult,
+} from '../../../providers';
 import { ChainId, CurrencyAmount, log, poolToString } from '../../../util';
 import { MixedRoute, V2Route, V3Route } from '../../router';
 import { AlphaRouterConfig } from '../alpha-router';
@@ -55,7 +60,7 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
     tokenOut: Token,
     tradeType: TradeType,
     routingConfig: AlphaRouterConfig
-  ): Promise<GetRoutesResult<Route>>
+  ): Promise<GetRoutesResult<Route>>;
 
   /**
    * Public method that will fetch quotes for the combination of every route and every amount.
@@ -81,7 +86,7 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
     candidatePools?: CandidatePoolsBySelectionCriteria,
     gasModel?: IGasModel<RouteWithValidQuote>,
     gasPriceWei?: BigNumber
-  ): Promise<GetQuotesResult>
+  ): Promise<GetQuotesResult>;
 
   /**
    * Public method which would first get the routes and then get the quotes.
@@ -107,8 +112,8 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
     gasModel?: IGasModel<RouteWithValidQuote>,
     gasPriceWei?: BigNumber
   ): Promise<GetQuotesResult> {
-    return this.getRoutes(tokenIn, tokenOut, tradeType, routingConfig)
-      .then((routesResult) =>
+    return this.getRoutes(tokenIn, tokenOut, tradeType, routingConfig).then(
+      (routesResult) =>
         this.getQuotes(
           routesResult.routes,
           amounts,
@@ -120,7 +125,7 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
           gasModel,
           gasPriceWei
         )
-      );
+    );
   }
 
   protected async applyTokenValidatorToPools<T extends Pool | Pair>(
@@ -138,7 +143,8 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
 
     const tokens = _.flatMap(pools, (pool) => [pool.token0, pool.token1]);
 
-    const tokenValidationResults = await this.tokenValidatorProvider.validateTokens(tokens);
+    const tokenValidationResults =
+      await this.tokenValidatorProvider.validateTokens(tokens);
 
     const poolsFiltered = _.filter(pools, (pool: T) => {
       const token0Validation = tokenValidationResults.getValidationByToken(
@@ -153,7 +159,8 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
 
       if (token0Invalid || token1Invalid) {
         log.info(
-          `Dropping pool ${poolToString(pool)} because token is invalid. ${pool.token0.symbol
+          `Dropping pool ${poolToString(pool)} because token is invalid. ${
+            pool.token0.symbol
           }: ${token0Validation}, ${pool.token1.symbol}: ${token1Validation}`
         );
       }

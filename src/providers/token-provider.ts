@@ -41,6 +41,27 @@ export const USDC_MAINNET = new Token(
   'USDC',
   'USD//C'
 );
+export const USDC_BOMB = new Token(
+  ChainId.BOMB,
+  '0x75942DD8bD0C6F845a647E0Fa157b5725077960D',
+  18,
+  'USDC',
+  'USDC'
+);
+export const USDT_BOMB = new Token(
+  ChainId.BOMB,
+  '0x0FCbc0baCaD8C73be4Fad141682542b44C4737bB',
+  18,
+  'USDT',
+  'Tether'
+);
+export const WBTC_BOMB = new Token(
+  ChainId.BOMB,
+  '0x140F62aCCC69cb24eABdC0E00b7caaC577cA5b24',
+  18,
+  'BTC',
+  'Wrapped BTC'
+);
 export const USDT_MAINNET = new Token(
   ChainId.MAINNET,
   '0xdAC17F958D2ee523a2206206994597C13D831ec7',
@@ -624,8 +645,7 @@ export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,
     protected multicall2Provider: IMulticallProvider
-  ) {
-  }
+  ) {}
 
   public async getTokens(
     _addresses: string[],
@@ -764,6 +784,8 @@ export const USDT_ON = (chainId: ChainId): Token => {
       return USDT_MAINNET;
     case ChainId.ROPSTEN:
       return USDT_ROPSTEN;
+    case ChainId.BOMB:
+      return USDT_BOMB;
     case ChainId.RINKEBY:
       return USDT_RINKEBY;
     case ChainId.GÖRLI:
@@ -791,6 +813,8 @@ export const USDC_ON = (chainId: ChainId): Token => {
   switch (chainId) {
     case ChainId.MAINNET:
       return USDC_MAINNET;
+    case ChainId.BOMB:
+      return USDC_BOMB;
     case ChainId.ROPSTEN:
       return USDC_ROPSTEN;
     case ChainId.RINKEBY:

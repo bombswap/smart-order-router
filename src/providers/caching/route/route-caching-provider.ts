@@ -29,19 +29,34 @@ export abstract class IRouteCachingProvider {
    * @param protocols
    * @param blockNumber
    */
-  public readonly getCachedRoute = async ( // Defined as a readonly member instead of a regular function to make it final.
+  public readonly getCachedRoute = async (
+    // Defined as a readonly member instead of a regular function to make it final.
     chainId: number,
     amount: CurrencyAmount<Currency>,
     quoteToken: Token,
     tradeType: TradeType,
     protocols: Protocol[],
-    blockNumber: number,
+    blockNumber: number
   ): Promise<CachedRoutes | undefined> => {
-    if (await this.getCacheMode(chainId, amount, quoteToken, tradeType, protocols) == CacheMode.Darkmode) {
+    if (
+      (await this.getCacheMode(
+        chainId,
+        amount,
+        quoteToken,
+        tradeType,
+        protocols
+      )) == CacheMode.Darkmode
+    ) {
       return undefined;
     }
 
-    const cachedRoute = await this._getCachedRoute(chainId, amount, quoteToken, tradeType, protocols);
+    const cachedRoute = await this._getCachedRoute(
+      chainId,
+      amount,
+      quoteToken,
+      tradeType,
+      protocols
+    );
 
     return this.filterExpiredCachedRoutes(cachedRoute, blockNumber);
   };
@@ -55,15 +70,22 @@ export abstract class IRouteCachingProvider {
    * @param cachedRoutes The route to cache.
    * @returns Promise<boolean> Indicates if the route was inserted into cache.
    */
-  public readonly setCachedRoute = async ( // Defined as a readonly member instead of a regular function to make it final.
+  public readonly setCachedRoute = async (
+    // Defined as a readonly member instead of a regular function to make it final.
     cachedRoutes: CachedRoutes,
     amount: CurrencyAmount<Currency>
   ): Promise<boolean> => {
-    if (await this.getCacheModeFromCachedRoutes(cachedRoutes, amount) == CacheMode.Darkmode) {
+    if (
+      (await this.getCacheModeFromCachedRoutes(cachedRoutes, amount)) ==
+      CacheMode.Darkmode
+    ) {
       return false;
     }
 
-    cachedRoutes.blocksToLive = await this._getBlocksToLive(cachedRoutes, amount);
+    cachedRoutes.blocksToLive = await this._getBlocksToLive(
+      cachedRoutes,
+      amount
+    );
 
     return this._setCachedRoute(cachedRoutes, amount);
   };
@@ -78,7 +100,10 @@ export abstract class IRouteCachingProvider {
     cachedRoutes: CachedRoutes,
     amount: CurrencyAmount<Currency>
   ): Promise<CacheMode> {
-    const quoteToken = cachedRoutes.tradeType == TradeType.EXACT_INPUT ? cachedRoutes.tokenOut : cachedRoutes.tokenIn;
+    const quoteToken =
+      cachedRoutes.tradeType == TradeType.EXACT_INPUT
+        ? cachedRoutes.tokenOut
+        : cachedRoutes.tokenIn;
 
     return this.getCacheMode(
       cachedRoutes.chainId,
@@ -106,7 +131,7 @@ export abstract class IRouteCachingProvider {
     quoteToken: Token,
     tradeType: TradeType,
     protocols: Protocol[]
-  ): Promise<CacheMode>
+  ): Promise<CacheMode>;
 
   private filterExpiredCachedRoutes(
     cachedRoutes: CachedRoutes | undefined,
@@ -132,7 +157,7 @@ export abstract class IRouteCachingProvider {
     quoteToken: Token,
     tradeType: TradeType,
     protocols: Protocol[]
-  ): Promise<CachedRoutes | undefined>
+  ): Promise<CachedRoutes | undefined>;
 
   /**
    * Internal function to insert the CachedRoute into cache.
@@ -142,7 +167,10 @@ export abstract class IRouteCachingProvider {
    * @param amount
    * @protected
    */
-  protected abstract _setCachedRoute(cachedRoutes: CachedRoutes, amount: CurrencyAmount<Currency>): Promise<boolean>
+  protected abstract _setCachedRoute(
+    cachedRoutes: CachedRoutes,
+    amount: CurrencyAmount<Currency>
+  ): Promise<boolean>;
 
   /**
    * Internal function to getBlocksToLive for a given cachedRoute.
@@ -153,5 +181,8 @@ export abstract class IRouteCachingProvider {
    * @param amount
    * @protected
    */
-  protected abstract _getBlocksToLive(cachedRoutes: CachedRoutes, amount: CurrencyAmount<Currency>): Promise<number>
+  protected abstract _getBlocksToLive(
+    cachedRoutes: CachedRoutes,
+    amount: CurrencyAmount<Currency>
+  ): Promise<number>;
 }

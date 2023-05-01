@@ -19,6 +19,7 @@ import {
   DAI_ROPSTEN,
   USDC_ARBITRUM,
   USDC_ARBITRUM_GOERLI,
+  USDC_BOMB,
   USDC_BSC,
   USDC_ETHEREUM_GNOSIS,
   USDC_GÖRLI,
@@ -32,6 +33,7 @@ import {
   USDC_ROPSTEN,
   USDT_ARBITRUM,
   USDT_ARBITRUM_RINKEBY,
+  USDT_BOMB,
   USDT_BSC,
   USDT_GÖRLI,
   USDT_KOVAN,
@@ -61,6 +63,7 @@ import {
 export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
   [ChainId.MAINNET]: [DAI_MAINNET, USDC_MAINNET, USDT_MAINNET],
   [ChainId.RINKEBY]: [DAI_RINKEBY_1, DAI_RINKEBY_2],
+  [ChainId.BOMB]: [USDT_BOMB, USDC_BOMB],
   [ChainId.ARBITRUM_ONE]: [DAI_ARBITRUM, USDC_ARBITRUM, USDT_ARBITRUM],
   [ChainId.OPTIMISM]: [DAI_OPTIMISM, USDC_OPTIMISM, USDT_OPTIMISM],
   [ChainId.OPTIMISM_GOERLI]: [
@@ -101,8 +104,8 @@ export type BuildOnChainGasModelFactoryType = {
   quoteToken: Token;
   v2poolProvider: IV2PoolProvider;
   l2GasDataProvider?:
-    | IL2GasDataProvider<OptimismGasData>
-    | IL2GasDataProvider<ArbitrumGasData>;
+  | IL2GasDataProvider<OptimismGasData>
+  | IL2GasDataProvider<ArbitrumGasData>;
 };
 
 export type BuildV2GasModelFactoryType = {
@@ -172,10 +175,10 @@ export abstract class IOnChainGasModelFactory {
   public abstract buildGasModel({
     chainId,
     gasPriceWei,
-    v3poolProvider: V3poolProvider,
+    v3poolProvider,
     amountToken,
     quoteToken,
-    v2poolProvider: V2poolProvider,
+    v2poolProvider,
     l2GasDataProvider,
   }: BuildOnChainGasModelFactoryType): Promise<
     IGasModel<V3RouteWithValidQuote | MixedRouteWithValidQuote>

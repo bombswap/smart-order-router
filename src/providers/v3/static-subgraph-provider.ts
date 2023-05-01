@@ -38,6 +38,7 @@ import {
   UNI_ARBITRUM_RINKEBY,
   USDC_ARBITRUM,
   USDC_ARBITRUM_GOERLI,
+  USDC_BOMB,
   USDC_BSC,
   USDC_ETHEREUM_GNOSIS,
   USDC_GÖRLI,
@@ -52,6 +53,7 @@ import {
   USDC_ROPSTEN,
   USDT_ARBITRUM,
   USDT_ARBITRUM_RINKEBY,
+  USDT_BOMB,
   USDT_BSC,
   USDT_GÖRLI,
   USDT_KOVAN,
@@ -62,6 +64,7 @@ import {
   USDT_RINKEBY,
   USDT_ROPSTEN,
   WBTC_ARBITRUM,
+  WBTC_BOMB,
   WBTC_GNOSIS,
   WBTC_GÖRLI,
   WBTC_KOVAN,
@@ -90,6 +93,12 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USDC_MAINNET,
     USDT_MAINNET,
     WBTC_MAINNET,
+  ],
+  [ChainId.BOMB]: [
+    WRAPPED_NATIVE_CURRENCY[ChainId.BOMB]!, //TODO add more
+    USDC_BOMB,
+    USDT_BOMB,
+    WBTC_BOMB,
   ],
   [ChainId.ROPSTEN]: [
     WRAPPED_NATIVE_CURRENCY[ChainId.ROPSTEN]!,
@@ -209,8 +218,7 @@ export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
   constructor(
     private chainId: ChainId,
     private poolProvider: IV3PoolProvider
-  ) {
-  }
+  ) {}
 
   public async getPools(
     tokenIn?: Token,

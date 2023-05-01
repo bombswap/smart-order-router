@@ -8,8 +8,11 @@ import {
   DAI_MAINNET,
   DAI_RINKEBY_1,
   DAI_RINKEBY_2,
+  USDC_BOMB,
   USDC_MAINNET,
+  USDT_BOMB,
   USDT_MAINNET,
+  WBTC_BOMB,
   WBTC_MAINNET,
 } from '../token-provider';
 
@@ -26,6 +29,12 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USDC_MAINNET,
     USDT_MAINNET,
     WBTC_MAINNET,
+  ],
+  [ChainId.BOMB]: [
+    WRAPPED_NATIVE_CURRENCY[ChainId.BOMB]!,
+    USDT_BOMB,
+    USDC_BOMB,
+    WBTC_BOMB,
   ],
   [ChainId.ROPSTEN]: [WRAPPED_NATIVE_CURRENCY[ChainId.ROPSTEN]!],
   [ChainId.RINKEBY]: [
