@@ -1,4 +1,4 @@
-import { ApprovalTypes } from '@uniswap/router-sdk';
+import { ApprovalTypes } from '@bombswap/router-sdk';
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core';
 
 import { SwapRouter02__factory } from '../types/other/factories/SwapRouter02__factory';
@@ -35,7 +35,7 @@ export class SwapRouterProvider implements ISwapRouterProvider {
   constructor(
     protected multicall2Provider: IMulticallProvider,
     protected chainId: ChainId
-  ) {}
+  ) { }
 
   public async getApprovalType(
     tokenInAmount: CurrencyAmount<Currency>,

@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Currency, Token, TradeType } from '@uniswap/sdk-core';
-import { Pair } from '@uniswap/v2-sdk';
+import { Pair } from '@bombswap/v2-sdk';
 import { Pool } from '@uniswap/v3-sdk';
 import _ from 'lodash';
 
@@ -159,8 +159,7 @@ export abstract class BaseQuoter<Route extends V2Route | V3Route | MixedRoute> {
 
       if (token0Invalid || token1Invalid) {
         log.info(
-          `Dropping pool ${poolToString(pool)} because token is invalid. ${
-            pool.token0.symbol
+          `Dropping pool ${poolToString(pool)} because token is invalid. ${pool.token0.symbol
           }: ${token0Validation}, ${pool.token1.symbol}: ${token1Validation}`
         );
       }

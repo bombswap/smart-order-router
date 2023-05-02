@@ -39,6 +39,7 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (
     case ChainId.ARBITRUM_ONE:
     case ChainId.ARBITRUM_RINKEBY:
     case ChainId.ARBITRUM_GOERLI:
+    case ChainId.BOMB:
     case ChainId.CELO:
     case ChainId.CELO_ALFAJORES:
       return {

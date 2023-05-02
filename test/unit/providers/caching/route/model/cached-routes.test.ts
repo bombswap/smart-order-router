@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@bombswap/router-sdk';
 import { TradeType } from '@uniswap/sdk-core';
 import { ChainId, V3RouteWithValidQuote } from '../../../../../../build/main';
 import { CachedRoutes, DAI_MAINNET as DAI, USDC_MAINNET as USDC } from '../../../../../../src';

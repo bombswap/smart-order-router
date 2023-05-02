@@ -1,5 +1,5 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { Trade } from '@uniswap/router-sdk';
+import { Trade } from '@bombswap/router-sdk';
 import { Percent, TradeType } from '@uniswap/sdk-core';
 import { BigNumber } from 'ethers';
 import sinon from 'sinon';
@@ -403,7 +403,7 @@ describe('Eth estimate gas simulator', () => {
     sinon
       .stub(provider, <any>'getBalance')
       .resolves(BigNumber.from(325));
-    sinon.replace(provider, 'estimateGas', () => {throw new Error()})
+    sinon.replace(provider, 'estimateGas', () => { throw new Error() })
     const swapRouteWithGasEstimate = await simulator.simulate(
       fromAddress,
       swapOptions,

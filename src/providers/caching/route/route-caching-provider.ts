@@ -4,7 +4,7 @@
  * @export
  * @interface IRouteCachingProvider
  */
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@bombswap/router-sdk';
 import { Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core';
 
 import { ChainId } from '../../../util';

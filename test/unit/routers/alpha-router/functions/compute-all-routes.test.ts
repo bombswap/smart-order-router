@@ -1,4 +1,4 @@
-import { Pair } from '@uniswap/v2-sdk';
+import { Pair } from '@bombswap/v2-sdk';
 import { encodeSqrtRatioX96, FeeAmount, Pool } from '@uniswap/v3-sdk';
 import {
   CurrencyAmount,

@@ -4,7 +4,7 @@ import {
   MixedRouteSDK,
   Protocol,
   Trade,
-} from '@uniswap/router-sdk';
+} from '@bombswap/router-sdk';
 import {
   Currency,
   Fraction,
@@ -12,8 +12,8 @@ import {
   Token,
   TradeType,
 } from '@uniswap/sdk-core';
-import { SwapOptions as UniversalRouterSwapOptions } from '@uniswap/universal-router-sdk';
-import { Route as V2RouteRaw } from '@uniswap/v2-sdk';
+import { SwapOptions as UniversalRouterSwapOptions } from '@bombswap/universal-router-sdk';
+import { Route as V2RouteRaw } from '@bombswap/v2-sdk';
 import {
   Pool,
   Position,
@@ -147,13 +147,13 @@ export type SwapOptionsSwapRouter02 = {
     s: string;
   } & (
     | {
-        amount: string;
-        deadline: string;
-      }
+      amount: string;
+      deadline: string;
+    }
     | {
-        nonce: string;
-        expiry: string;
-      }
+      nonce: string;
+      expiry: string;
+    }
   );
 };
 

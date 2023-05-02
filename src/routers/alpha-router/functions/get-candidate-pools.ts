@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@bombswap/router-sdk';
 import { Token, TradeType } from '@uniswap/sdk-core';
 import { FeeAmount } from '@uniswap/v3-sdk';
 import _ from 'lodash';
@@ -532,8 +532,7 @@ export async function getV3CandidatePools({
   });
 
   const printV3SubgraphPool = (s: V3SubgraphPool) =>
-    `${tokenAccessor.getTokenByAddress(s.token0.id)?.symbol ?? s.token0.id}/${
-      tokenAccessor.getTokenByAddress(s.token1.id)?.symbol ?? s.token1.id
+    `${tokenAccessor.getTokenByAddress(s.token0.id)?.symbol ?? s.token0.id}/${tokenAccessor.getTokenByAddress(s.token1.id)?.symbol ?? s.token1.id
     }/${s.feeTier}`;
 
   log.info(
@@ -572,10 +571,8 @@ export async function getV3CandidatePools({
 
     if (!tokenA || !tokenB) {
       log.info(
-        `Dropping candidate pool for ${subgraphPool.token0.id}/${
-          subgraphPool.token1.id
-        }/${fee} because ${
-          tokenA ? subgraphPool.token1.id : subgraphPool.token0.id
+        `Dropping candidate pool for ${subgraphPool.token0.id}/${subgraphPool.token1.id
+        }/${fee} because ${tokenA ? subgraphPool.token1.id : subgraphPool.token0.id
         } not found by token provider`
       );
       return undefined;
@@ -919,8 +916,7 @@ export async function getV2CandidatePools({
   });
 
   const printV2SubgraphPool = (s: V2SubgraphPool) =>
-    `${tokenAccessor.getTokenByAddress(s.token0.id)?.symbol ?? s.token0.id}/${
-      tokenAccessor.getTokenByAddress(s.token1.id)?.symbol ?? s.token1.id
+    `${tokenAccessor.getTokenByAddress(s.token0.id)?.symbol ?? s.token0.id}/${tokenAccessor.getTokenByAddress(s.token1.id)?.symbol ?? s.token1.id
     }`;
 
   log.info(
@@ -1138,10 +1134,8 @@ export async function getMixedRouteCandidatePools({
 
     if (!tokenA || !tokenB) {
       log.info(
-        `Dropping candidate pool for ${subgraphPool.token0.id}/${
-          subgraphPool.token1.id
-        }/${fee} because ${
-          tokenA ? subgraphPool.token1.id : subgraphPool.token0.id
+        `Dropping candidate pool for ${subgraphPool.token0.id}/${subgraphPool.token1.id
+        }/${fee} because ${tokenA ? subgraphPool.token1.id : subgraphPool.token0.id
         } not found by token provider`
       );
       return undefined;

@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@bombswap/router-sdk';
 import { TradeType } from '@uniswap/sdk-core';
 import { Pool } from '@uniswap/v3-sdk';
 import sinon from 'sinon';

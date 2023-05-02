@@ -68,13 +68,13 @@ import 'jest-environment-hardhat';
 
 import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers';
 import { AllowanceTransfer, PermitSingle } from '@uniswap/permit2-sdk';
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from '@bombswap/router-sdk';
 import {
   PERMIT2_ADDRESS,
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN,
-} from '@uniswap/universal-router-sdk';
-import { Permit2Permit } from '@uniswap/universal-router-sdk/dist/utils/permit2';
-import { Pair } from '@uniswap/v2-sdk';
+} from '@bombswap/universal-router-sdk';
+import { Permit2Permit } from '@bombswap/universal-router-sdk/dist/utils/permit2';
+import { Pair } from '@bombswap/v2-sdk';
 import { encodeSqrtRatioX96, FeeAmount, Pool } from '@uniswap/v3-sdk';
 import bunyan from 'bunyan';
 import { BigNumber, providers, Wallet } from 'ethers';

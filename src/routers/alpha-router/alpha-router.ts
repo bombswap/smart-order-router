@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, JsonRpcProvider } from '@ethersproject/providers';
 import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
-import { Protocol, SwapRouter, Trade } from '@uniswap/router-sdk';
+import { Protocol, SwapRouter, Trade } from '@bombswap/router-sdk';
 import { Currency, Fraction, Token, TradeType } from '@uniswap/sdk-core';
 import { TokenList } from '@uniswap/token-lists';
 import { Pool, Position, SqrtPriceMath, TickMath } from '@uniswap/v3-sdk';
@@ -499,6 +499,27 @@ export class AlphaRouter
             {
               gasLimitOverride: 6_250_000,
               multicallChunk: 4,
+            }
+          );
+          break;
+        case ChainId.BOMB:
+          this.onChainQuoteProvider = new OnChainQuoteProvider(
+            chainId,
+            provider,
+            this.multicall2Provider,
+            {
+              retries: 2,
+              minTimeout: 100,
+              maxTimeout: 1000,
+            },
+            {
+              multicallChunk: 100,
+              gasLimitPerCall: 705_000,
+              quoteMinSuccessRate: 0.15,
+            },
+            {
+              gasLimitOverride: 2_000_000,
+              multicallChunk: 50,
             }
           );
           break;
